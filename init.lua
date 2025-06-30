@@ -698,7 +698,20 @@ require('lazy').setup({
             },
           },
         },
-        yamlls = {},
+        yamlls = {  -- здесь yamlls, не yaml-language-server
+          settings = {
+            yaml = {
+              schemaStore = {
+                enable = true,
+                url = "https://www.schemastore.org/api/json/catalog.json",
+              },
+              schemas = {
+                kubernetes = "*.yaml",
+                ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*.{yml,yaml}",
+              },
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -717,7 +730,7 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        'yaml-language-server', -- LSP для YAML
+        'yamlls', -- LSP для YAML
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
