@@ -731,6 +731,7 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'yamlls', -- LSP для YAML
+        'yamlfmt',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -783,6 +784,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        yaml = { 'yamlfmt' },  -- форматтер для YAML
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
