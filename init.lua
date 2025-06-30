@@ -715,7 +715,7 @@ require('lazy').setup({
               },
             },
           },
-}
+        }
 
       }
 
