@@ -698,7 +698,7 @@ require('lazy').setup({
             },
           },
         },
-        yamlls = {  -- здесь yamlls, не yaml-language-server
+        yamlls = {
           settings = {
             yaml = {
               schemaStore = {
@@ -706,12 +706,17 @@ require('lazy').setup({
                 url = "https://www.schemastore.org/api/json/catalog.json",
               },
               schemas = {
-                kubernetes = "*.yaml",
-                ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*.{yml,yaml}",
+                -- Kubernetes для всех файлов с расширением .yaml
+                kubernetes = { "*.yaml", "*.yml" },
+                -- GitHub Actions workflows (поддержка .yml и .yaml)
+                ["http://json.schemastore.org/github-workflow"] = { ".github/workflows/*.{yml,yaml}" },
+                -- GitLab CI (поддержка .gitlab-ci.yml и файлов в папке ci/*.yml)
+                ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = { ".gitlab-ci.yml", "ci/*.yml" },
               },
             },
           },
-        },
+}
+
       }
 
       -- Ensure the servers and tools above are installed
