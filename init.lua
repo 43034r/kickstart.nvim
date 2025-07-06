@@ -281,6 +281,13 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      current_line_blame = true, -- Включить отображение blame для текущей строки
+      current_line_blame_opts = {
+        virt_text = true, -- Показывать как виртуальный текст
+        virt_text_pos = 'eol', -- Позиция: в конце строки (end of line)
+        delay = 5000, -- Задержка в мс перед появлением
+        ignore_whitespace = false, -- Учитывать пробелы при определении изменений для blame
+      },
     },
   },
 
@@ -703,20 +710,19 @@ require('lazy').setup({
             yaml = {
               schemaStore = {
                 enable = true,
-                url = "https://www.schemastore.org/api/json/catalog.json",
+                url = 'https://www.schemastore.org/api/json/catalog.json',
               },
               schemas = {
                 -- Kubernetes для всех файлов с расширением .yaml
-                kubernetes = { "*.yaml", "*.yml" },
+                kubernetes = { '*.yaml', '*.yml' },
                 -- GitHub Actions workflows (поддержка .yml и .yaml)
-                ["http://json.schemastore.org/github-workflow"] = { ".github/workflows/*.{yml,yaml}" },
+                ['http://json.schemastore.org/github-workflow'] = { '.github/workflows/*.{yml,yaml}' },
                 -- GitLab CI (поддержка .gitlab-ci.yml и файлов в папке ci/*.yml)
-                ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = { ".gitlab-ci.yml", "ci/*.yml" },
+                ['https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json'] = { '.gitlab-ci.yml', 'ci/*.yml' },
               },
             },
           },
-        }
-
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -790,7 +796,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        yaml = { 'yamlfmt' },  -- форматтер для YAML
+        yaml = { 'yamlfmt' }, -- форматтер для YAML
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
